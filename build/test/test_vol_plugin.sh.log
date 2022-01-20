@@ -1,0 +1,26 @@
+HDF5-DIAG: Error detected in HDF5 (1.13.0) thread 0:
+  #000: H5VLcallback.c line 3458 in H5VLfile_create(): not a file access property list
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5-DIAG: Error detected in HDF5 (1.13.0) thread 0:
+  #000: H5F.c line 669 in H5Fcreate(): 'post open' operation failed
+    major: File accessibility
+    minor: Unable to initialize object
+  #001: H5F.c line 532 in H5F__post_open_api_common(): can't check for 'post open' operation
+    major: File accessibility
+    minor: Can't get value
+  #002: H5VLcallback.c line 6365 in H5VL_introspect_opt_query(): can't query optional operation support
+    major: Virtual Object Layer
+    minor: Can't get value
+  #003: H5VLcallback.c line 6329 in H5VL__introspect_opt_query(): VOL connector has no 'opt_query' method
+    major: Virtual Object Layer
+    minor: Feature is unsupported
+  #004: H5VLcallback.c line 3458 in H5VLfile_create(): not a file access property list
+    major: Invalid arguments to routine
+    minor: Inappropriate type
+HDF5: infinite loop closing library
+      L,T_top,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F
+------- LOG: H5Fcreate Starts!
+------- LOG: H5Fcreate Ends
+All VOL plugin tests passed.
+PASS test_vol_plugin.sh (exit status: 0)
