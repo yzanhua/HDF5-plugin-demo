@@ -165,10 +165,8 @@ void *H5VL_test_file_create(const char *name, unsigned flags, hid_t fcpl_id, hid
     H5VL_log_t *file;
     H5VL_log_t* info = NULL;
     file = (H5VL_log_t *)calloc(1, sizeof(H5VL_log_t));
-    hid_t* under_fapl = NULL; 
-    //H5Pget_vol_info(fapl_id, (void**) &under_fapl);
-    //printf("------- LOG: under_fapl id: %p\n", under_fapl);
-    file->under_object = H5VLfile_create(name, flags, fcpl_id, H5P_DEFAULT, dxpl_id, req);
+    hid_t under_fapl = H5Pget_vol_info(fapl_id, (void**) &info);
+    file->under_object = H5VLfile_create(name, flags, fcpl_id, under_fapl, dxpl_id, req);
     printf("------- LOG: H5Fcreate Ends\n");
     return (void *)file;
 }

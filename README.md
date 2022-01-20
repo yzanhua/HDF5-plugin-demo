@@ -1,33 +1,27 @@
-# HDF5 VOL connector template
+# HDF5 Plugin Demo
 
-This is a template for creating an HDF5 virtual object layer (VOL) connector.
+This repo tries to show a simple implementation of a printf plugin that stacks on top of the native HDF5 plugin. Whenever a H5FCreate() is called, addtional messages are printed. 
 
-Copy this code into your own repository and modify the source, test, and build files as needed to implement your own functionality.
+This repo forks from [vol-template](https://github.com/HDFGroup/vol-template).
 
-The code included in the source directory builds an "empty" VOL connector which has no functionality aside from being capable of registration. Although lacking as a "real" VOL connector, this shell can still serve as a useful test of whether dynamic plugin loading is working.
+## Usage
+```bash
+$: git clone git@github.com:yzanhua/HDF5-plugin-demo.git
+$: cd HDF5-plugin-demo
+$: bash autogen.sh
+$: cd build
+$: ../configure --with-hdf5=[path to h5pcc] CPPFALGS=-I[path to mpich include]
+$: # ../configure  --with-hdf5=/homes/zhd1108/HDF5/1.13.0/bin/h5pcc CPPFLAGS=-I/homes/zhd1108/MPICH/3.4.2/include
+$: make
+$: cd test # now inside build/test
+$: make check
+```
 
-NOTE: This template targets HDF5 1.13.0. The VOL API in HDF5 1.12.x is no longer supported for VOL connector development.
+1. source codes of the plugin are at `src/template_vol_connector.c` and `src/template_vol_connector.h`.
+2. test codes are at "test/vol_plugin.c" (NOT build/test/vol_plugin.c)
+3. outputs are at "build/test/test_vol_plugin.sh.log"
 
+## Current Problem:
 
-## Getting started
+In `src/template_vol_connector.c`, I think I am getting line 168 `hid_t under_fapl = H5Pget_vol_info(fapl_id, (void**) &info);` wrong.
 
-You will need a few things to build the code in this repository:
-
-* HDF5 1.13.0 or later
-* CMake (3.9 or later) or the Autotools (autoconf 2.69 or later and matching automake, etc.)
-
-### Autotools Builds
-
-1) The first thing you need to do is run the autogen.sh script located in the source root. This will run the autotools and generate the build files.
-
-2) Next, switch to your build directory and run configure. You might need to specify the path to a VOL-enabled HDF5 (version 1.13.0 or later) using the --with-hdf5 option. Oddly, --with-hdf5 needs you to point to the h5cc file. This will be improved in the future.
-
-3) Once configured, you should be able to make and build. Switching to the test directory and running 'make check' will run the test script.
-
-### CMake Builds
-
-1) Run ccmake or the CMake GUI and point it at a VOL-enabled HDF5 installation. You may need to switch to see HDF5\_DIR, which you'll need to set to the share/cmake directory of your install. Configure and generate.
-
-2) Build the software using 'make', etc.
-
-3) Run the test program using 'make test', 'ctest .', etc.
